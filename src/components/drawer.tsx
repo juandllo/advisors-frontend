@@ -8,7 +8,8 @@ import {
   UserRound,
   Ticket,
   SquareUser,
-  QrCode
+  QrCode,
+  MessageCircle
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -37,12 +38,12 @@ const items: MenuItem[] = [
     </Badge>
   },
   {
-    to: "/",
+    to: "/saldo",
     label: "Saldo",
     icon: <HandCoins className="h-6 w-6" />
   },
   {
-    to: "/",
+    to: "/tickets",
     label: "Tickets",
     icon: <Ticket className="h-6 w-6" />
   }
@@ -56,14 +57,16 @@ export default function Drawer() {
           <UserRound className="h-24 w-24 text-gray-300" />
           <div className="flex flex-col items-center">
             <span className="font-light text-muted-foreground">Juan Arboleda</span>
-            <span className="font-extralight text-sm text-gray-400">Administrador</span>
+            <span className="font-extralight text-sm text-gray-400">Asesor</span>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3">
-          <Button variant="outline" size="icon">
-            <SquareUser className="h-4 w-4" />
-            <span className="sr-only">Account</span>
-          </Button>
+          <Link to="/cuenta">
+            <Button variant="outline" size="icon">
+              <SquareUser className="h-4 w-4" />
+              <span className="sr-only">Account</span>
+            </Button>
+          </Link>
           <Link to="/notificaciones">
             <Button variant="outline" size="icon" className="relative inline-flex">
               <Bell className="h-4 w-4" />
@@ -79,9 +82,15 @@ export default function Drawer() {
             <span className="sr-only">Qr Code</span>
           </Button>
           <Button variant="outline" size="icon">
-            <LogOut className="h-4 w-4" />
-            <span className="sr-only">Logout</span>
+            <MessageCircle className="h-4 w-4" />
+            <span className="sr-only">WhatsApp Message</span>
           </Button>
+          <Link to="/inicio-sesion">
+            <Button variant="outline" size="icon">
+              <LogOut className="h-4 w-4" />
+              <span className="sr-only">Logout</span>
+            </Button>
+          </Link>
         </div>
       </div>
       <hr className="mx-6" />
@@ -99,7 +108,7 @@ export default function Drawer() {
           ))}
         </nav>
       </div>
-      <div className="mt-auto p-4">
+      <div className="flex flex-col items-center mt-auto p-4">
         {/* <Card>
           <CardHeader className="p-2 pt-0 md:p-4">
             <CardTitle>Upgrade to Pro</CardTitle>
@@ -114,7 +123,10 @@ export default function Drawer() {
             </Button>
           </CardContent>
         </Card> */}
-        <p className="font-light text-sm text-muted-foreground">Todos los derechos reservados ®</p>
+        <p className="font-light text-sm text-muted-foreground">
+          Creado por <span className="font-semibold"><a href="https://github.com/juandllo" className="underline" target='_blank'>Juandllo</a> y Nautilius92</span>
+        </p>
+        <p className="font-light text-xs text-muted-foreground">® Todos los derechos reservados.</p>
       </div>
     </div>
   </div >
