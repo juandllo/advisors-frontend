@@ -1,30 +1,66 @@
-# React + TypeScript + Vite
+# Advisors Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+WebApplication que permite realizar la gestión de los pedidos que realizan los asesores, administrar saldos pendientes de los asesores, configuración de usuarios para los asesores, administrar los estados de los pedidos de los asesores y gestión de tickets de los asesores.
 
-Currently, two official plugins are available:
+## Librerías
+La aplicación esta construida utilizando las siguientes librerías y componentes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Vite 5.2.0 https://vitejs.dev/guide/
+* Typescript 5.2.2
+* React 18.2.0
+* TailwindCSS 3.4.3 https://tailwindui.com/
+* Radix-ui 
+* Shadcn https://ui.shadcn.com/
 
-## Expanding the ESLint configuration
+## Configuración y Ejecución
+Para ejecutar la aplicación es necesario tener configurado **`Node`** en la versión **`20.x.x`** https://nodejs.org/en. Una vez configurado **`Node`** debemos ejecutar los siguientes comandos.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Gestor de Dependencias
+El gestor de dependencias sugerido para el proyecto es **`pnpm`**. Seguir la documentación oficial para su instalación y configuración https://pnpm.io/es/installation.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+### Instalar Dependencias
+```bash 
+pnpm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Ejecutar Aplicación
+```bash
+pnpm run dev
+```
+
+### Instalar Componentes Shadcn
+Para instalar los componentes utilizados desde **`Shadcn`** se debe ejecutar el siguiente comando.
+```bash
+pnpm dlx shadcn-ui@latest add [COMPONENT_NAME]
+```
+
+> Consulta la documentación de [Shadcn](https://ui.shadcn.com/docs) para información adicional de componentes y su uso.
+
+## Estructura del Proyecto
+
+```bash
+📦 
+├─ 📁public
+├─ 📁src
+│  ├─ 📁assets
+│  ├─ 📁componentes
+│  │  └─ 📁ui
+│  ├─ 📁lib
+│  ├─ 📁pages
+│  ├─ 📁theme
+│  ├─ 📄App.css
+│  ├─ 📄App.tsx
+│  ├─ 📄index.css
+│  ├─ 📄main.tsx
+│  └─ 📄vite-env.d.ts
+├─ 📄components.json
+├─ 📄index.html
+├─ 📄package.json
+├─ 📄pnpm-lock.yaml
+├─ 📄postcss.config.js
+├─ 📄README.md
+├─ 📄tailwind.config.js
+├─ 📄tsconfig.json
+├─ 📄tscofing.node.json
+└─ 📄vite.config.ts
+```
