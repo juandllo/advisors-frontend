@@ -124,7 +124,8 @@ export default function Drawer() {
           </CardContent>
         </Card> */}
         <p className="font-light text-sm text-muted-foreground">
-          Creado por <span className="font-semibold"><a href="https://github.com/juandllo" className="underline" target='_blank'>Juandllo</a> y Nautilius92</span>
+          Creado por <span className="font-semibold"><a href="https://github.com/juandllo" className="underline" target='_blank'>Juandllo</a></span>
+          y <span className="font-semibold"><a href="https://github.com/Thheeo" className="underline" target='_blank'>Thheeo</a></span>
         </p>
         <p className="font-light text-xs text-muted-foreground">® Todos los derechos reservados.</p>
       </div>
