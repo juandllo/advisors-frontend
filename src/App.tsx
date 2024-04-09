@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from '@/components/layout'
 import Dashboard from '@/pages/dashboard'
@@ -9,9 +10,26 @@ import Tickets from '@/pages/tickets'
 import Account from '@/pages/account'
 import Login from '@/pages/login'
 import { ThemeProvider } from '@/theme/themeProvider'
+import { endpoints } from '@/config/endpoints';
+import { getHttp } from '@/helpers/httpHelpers';
 import './App.css'
+import { useUserStore } from '@/context/userContext';
 
 function App() {
+  const [updateUser] = useUserStore((state) => [state.updateUser]);
+  const userId = '66120fb9738cf0d06663d6b0'; // TODO eliminar este dato y obtenerlo de la sesion del usuario
+
+  useEffect(() => {
+    handleFetchUser();
+  }, []);
+
+  const handleFetchUser = async () => {
+    getHttp(`${endpoints.users}/${userId}`)
+      .then((res: any) => {
+        updateUser(res)
+      });
+  }
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <BrowserRouter>
