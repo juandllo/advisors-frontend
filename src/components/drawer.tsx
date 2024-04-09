@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useUserStore } from '@/context/userContext'
 import {
   Bell,
   Home,
@@ -50,13 +51,16 @@ const items: MenuItem[] = [
 ]
 
 export default function Drawer() {
+
+  const [user] = useUserStore((state) => [state.user])
+
   return <div className="hidden border-r bg-muted/40 md:block" >
     <div className="flex h-full max-h-screen flex-col gap-4">
       <div className="flex flex-col gap-5 items-center py-5 lg:px-6">
         <div className="flex flex-col items-center gap-2 font-semibold">
           <UserRound className="h-24 w-24 text-gray-300" />
           <div className="flex flex-col items-center">
-            <span className="font-light text-muted-foreground">Juan Arboleda</span>
+            <span className="font-light text-muted-foreground">{user.name} {user.lastName}</span>
             <span className="font-extralight text-sm text-gray-400">Asesor</span>
           </div>
         </div>
