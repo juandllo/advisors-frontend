@@ -26,7 +26,7 @@ interface MenuItem {
 
 const items: MenuItem[] = [
   {
-    to: "/",
+    to: "/inicio",
     label: "Inicio",
     icon: <Home className="h-6 w-6" />
   },
@@ -54,7 +54,7 @@ export default function Drawer() {
 
   const [user] = useUserStore((state) => [state.user])
 
-  return <div className="hidden border-r bg-muted/40 md:block" >
+  return <div className="hidden border-r md:block" >
     <div className="flex h-full max-h-screen flex-col gap-4">
       <div className="flex flex-col gap-5 items-center py-5 lg:px-6">
         <div className="flex flex-col items-center gap-2 font-semibold">
@@ -66,13 +66,13 @@ export default function Drawer() {
         </div>
         <div className="grid grid-cols-3 gap-3">
           <Link to="/cuenta">
-            <Button variant="outline" size="icon">
+            <Button variant="secondary" size="icon">
               <SquareUser className="h-4 w-4" />
               <span className="sr-only">Account</span>
             </Button>
           </Link>
           <Link to="/notificaciones">
-            <Button variant="outline" size="icon" className="relative inline-flex">
+            <Button variant="secondary" size="icon" className="relative inline-flex">
               <Bell className="h-4 w-4" />
               <span className="sr-only">Toggle notifications</span>
               <Badge className="absolute flex items-center justify-center -top-2 -end-2 ml-auto h-6 w-6 shrink-0 rounded-full">
@@ -81,16 +81,16 @@ export default function Drawer() {
             </Button>
           </Link>
           <ThemeToggle></ThemeToggle>
-          <Button variant="outline" size="icon">
+          <Button variant="secondary" size="icon">
             <QrCode className="h-4 w-4" />
             <span className="sr-only">Qr Code</span>
           </Button>
-          <Button variant="outline" size="icon">
+          <Button variant="secondary" size="icon">
             <MessageCircle className="h-4 w-4" />
             <span className="sr-only">WhatsApp Message</span>
           </Button>
           <Link to="/inicio-sesion">
-            <Button variant="outline" size="icon">
+            <Button variant="secondary" size="icon">
               <LogOut className="h-4 w-4" />
               <span className="sr-only">Logout</span>
             </Button>
@@ -113,20 +113,6 @@ export default function Drawer() {
         </nav>
       </div>
       <div className="flex flex-col items-center mt-auto p-4">
-        {/* <Card>
-          <CardHeader className="p-2 pt-0 md:p-4">
-            <CardTitle>Upgrade to Pro</CardTitle>
-            <CardDescription>
-              Unlock all features and get unlimited access to our support
-              team.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-            <Button size="sm" className="w-full">
-              Upgrade
-            </Button>
-          </CardContent>
-        </Card> */}
         <p className="font-light text-sm text-muted-foreground">
           Creado por <span className="font-semibold"><a href="https://github.com/juandllo" className="underline" target='_blank'>Juandllo</a></span> y <span className="font-semibold"><a href="https://github.com/Thheeo" className="underline" target='_blank'>Teo</a></span>
         </p>

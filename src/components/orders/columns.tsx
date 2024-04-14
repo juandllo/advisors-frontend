@@ -1,9 +1,10 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { DataTableColumnHeader } from './dataTableColumnHeader'
+import { DataTableColumnHeader } from '@/components/table/dataTableColumnHeader'
 import { DataTableRowActions } from './dataTableRowActions'
 import { TOrder } from '@/types/TOrder'
-import { statuses } from '@/interfaces/statuses'
+import { statuses } from '@/config/statuses'
 import { cn } from '@/lib/utils'
+import { dateFormatter, currencyFormatter } from '@/helpers/formatterHandler'
 
 export const columns: ColumnDef<TOrder>[] = [
   {
@@ -32,7 +33,7 @@ export const columns: ColumnDef<TOrder>[] = [
       return (
         <div className="flex space-x-2">
           <span className="max-w-[500px] truncate">
-            {row.getValue("total")}
+            {currencyFormatter(row.getValue("total"))}
           </span>
         </div>
       )
@@ -64,7 +65,7 @@ export const columns: ColumnDef<TOrder>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex w-[100px] items-center">
-          <span>{row.getValue("createdAt")}</span>
+          <span>{dateFormatter(row.getValue("createdAt"))}</span>
         </div>
       )
     },

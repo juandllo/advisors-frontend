@@ -1,19 +1,22 @@
-import { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Layout from '@/components/layout'
-import Dashboard from '@/pages/dashboard'
-import Notifications from '@/pages/notifications'
-import Orders from '@/pages/orders'
-import NotFound from '@/pages/notFound'
-import Balance from '@/pages/balance'
-import Tickets from '@/pages/tickets'
-import Account from '@/pages/account'
-import Login from '@/pages/login'
-import { ThemeProvider } from '@/theme/themeProvider'
+import { useEffect } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import Layout from '@/layout/layout';
+import Dashboard from '@/pages/dashboard';
+import Notifications from '@/pages/notifications';
+import Orders from '@/pages/orders/orders';
+import NotFound from '@/pages/notFound';
+import Balance from '@/pages/balance';
+import Tickets from '@/pages/tickets';
+import Account from '@/pages/account';
+import Login from '@/pages/login';
+import NewOrder from '@/pages/orders/newOrder';
+
+import { ThemeProvider } from '@/theme/themeProvider';
 import { endpoints } from '@/config/endpoints';
 import { getHttp } from '@/helpers/httpHelpers';
-import './App.css'
 import { useUserStore } from '@/context/userContext';
+import './App.css';
 
 function App() {
   const [updateUser] = useUserStore((state) => [state.updateUser]);
@@ -30,20 +33,57 @@ function App() {
       });
   }
 
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout />,
+      children: [
+        {
+          path: 'inicio',
+          element: <Dashboard />
+        },
+        {
+          path: 'notificaciones',
+          element: <Notifications />
+        },
+        {
+          path: 'pedidos',
+          element: <Orders />,
+          children: [
+            
+          ]
+        },
+        {
+          path: 'pedidos/nuevo',
+          element: <NewOrder />
+        },
+        {
+          path: '/saldo',
+          element: <Balance />
+        },
+        {
+          path: '/tickets',
+          element: <Tickets />
+        },
+        {
+          path: '/cuenta',
+          element: <Account />
+        },
+      ]
+    },
+    {
+      path: '/inicio-sesion',
+      element: <Login />
+    },
+    {
+      path: '*',
+      element: <NotFound />
+    }
+  ]);
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Layout><Dashboard /></Layout>} />
-          <Route path='/notificaciones' element={<Layout><Notifications /></Layout>} />
-          <Route path='/pedidos' element={<Layout><Orders /></Layout>} />
-          <Route path='/saldo' element={<Layout><Balance /></Layout>} />
-          <Route path='/tickets' element={<Layout><Tickets /></Layout>} />
-          <Route path='/cuenta' element={<Layout><Account /></Layout>} />
-          <Route path='/inicio-sesion' element={<Login />} />
-          <Route path='*' element={<Layout><NotFound /></Layout>} />
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </ThemeProvider>
   )
 }

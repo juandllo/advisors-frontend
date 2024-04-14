@@ -21,8 +21,9 @@ export function DataTableRowActions<TData>({
 
   const navigate = useNavigate()
 
-  const handlePlayerNavigation = () => {
-    navigate(`/players/${row.original._id}`)
+  const handleNavigation = () => {
+    const id = row.original._id;
+    navigate(`/orders/${id}`)
   }
 
   return (
