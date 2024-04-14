@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { DataTableViewOptions } from "./dataTableViewOptions"
 import { DataTableFacetedFilter } from "./dataTableFacetedFilter"
-import { statuses } from "@/interfaces/statuses"
+import { statuses } from "@/config/statuses"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
