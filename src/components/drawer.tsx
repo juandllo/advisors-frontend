@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom'
-import { useUserStore } from '@/context/userContext'
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthStore } from '@/context/accountContext';
+import { env } from '@/config/env';
 import {
   Bell,
   Home,
@@ -11,11 +12,11 @@ import {
   SquareUser,
   QrCode,
   MessageCircle
-} from "lucide-react"
+} from "lucide-react";
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { ThemeToggle } from './themeToggle'
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from './themeToggle';
 
 interface MenuItem {
   to: string
@@ -51,8 +52,16 @@ const items: MenuItem[] = [
 ]
 
 export default function Drawer() {
+  const navigate = useNavigate();
+  const [user] = useAuthStore(
+    (state) => [state.user]
+  );
 
-  const [user] = useUserStore((state) => [state.user])
+  const handleLogout = () => {
+    localStorage.removeItem(env.AUTH_TOKEN_KEY);
+    localStorage.removeItem(env.AUTH_USER_DATA);
+    navigate('/inicio-sesion');
+  }
 
   return <div className="hidden border-r md:block" >
     <div className="flex h-full max-h-screen flex-col gap-4">
@@ -61,7 +70,7 @@ export default function Drawer() {
           <UserRound className="h-24 w-24 text-gray-300" />
           <div className="flex flex-col items-center">
             <span className="font-light text-muted-foreground">{user.name} {user.lastName}</span>
-            <span className="font-extralight text-sm text-gray-400">Asesor</span>
+            <span className="font-extralight text-sm text-gray-400">{user.roles[0].roleName}</span>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3">
@@ -89,12 +98,10 @@ export default function Drawer() {
             <MessageCircle className="h-4 w-4" />
             <span className="sr-only">WhatsApp Message</span>
           </Button>
-          <Link to="/inicio-sesion">
-            <Button variant="secondary" size="icon">
-              <LogOut className="h-4 w-4" />
-              <span className="sr-only">Logout</span>
-            </Button>
-          </Link>
+          <Button onClick={handleLogout} variant="secondary" size="icon">
+            <LogOut className="h-4 w-4" />
+            <span className="sr-only">Logout</span>
+          </Button>
         </div>
       </div>
       <hr className="mx-6" />
