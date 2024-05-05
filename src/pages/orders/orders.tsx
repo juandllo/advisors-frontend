@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { endpoints } from "@/config/endpoints";
 import { getHttp } from "@/helpers/httpHelpers";
-import { useUserStore } from "@/context/userContext";
 import { TOrder } from "@/types/TOrder";
 import { DataTable } from "@/components/table/dataTable";
 import { columns } from "@/components/orders/columns";
+import { useAuthStore } from "@/context/accountContext";
 
 export default function Orders() {
-  const [user] = useUserStore((state) => [state.user]);
   const [orders, setOrders] = useState<TOrder[]>();
+  const [user] = useAuthStore(
+    (state) => [state.user]
+  );
 
   useEffect(() => {
     handleFetchOrders();

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Layout from '@/layout/layout';
 import Dashboard from '@/pages/dashboard';
@@ -12,79 +12,58 @@ import Account from '@/pages/account';
 import Login from '@/pages/login';
 import NewOrder from '@/pages/orders/newOrder';
 
+import { useAuth } from '@/hooks/auth'
+import { useAuthStore } from '@/context/accountContext';
+
+import { env } from '@/config/env';
+
 import { ThemeProvider } from '@/theme/themeProvider';
-import { endpoints } from '@/config/endpoints';
-import { getHttp } from '@/helpers/httpHelpers';
-import { useUserStore } from '@/context/userContext';
 import './App.css';
 
 function App() {
-  const [updateUser] = useUserStore((state) => [state.updateUser]);
-  const userId = '66120fb9738cf0d06663d6b0'; // TODO eliminar este dato y obtenerlo de la sesion del usuario
+  const { isLogged } = useAuth();
+  const [user, setToken, setUser] = useAuthStore(
+    (state) => [state.user, state.setToken, state.setUser]
+  );
 
   useEffect(() => {
-    handleFetchUser();
+    if (localStorage.getItem(env.AUTH_TOKEN_KEY)) {
+      const token = localStorage.getItem(env.AUTH_TOKEN_KEY);
+      setToken(token);
+      setUser(token);
+    }
   }, []);
 
-  const handleFetchUser = async () => {
-    getHttp(`${endpoints.users}/${userId}`)
-      .then((res: any) => {
-        updateUser(res)
-      });
+  const renderAdminRouter = () => {
+    if (user.roles.length === 0) return '';
+    if (user.roles[0].roleName !== env.ADMIN_ROLE) return '';
+    if (!isLogged) return '';
+
+    return <Route path='/' element=<Layout /> >
+      <Route path='inicio' element=<Dashboard /> />
+      <Route path='pedidos' element=<Orders /> />
+      <Route path='notificaciones' element=<Notifications /> />
+      <Route path='pedidos/nuevo' element=<NewOrder /> />
+      <Route path='saldo' element=<Balance /> />
+      <Route path='tickets' element=<Tickets /> />
+      <Route path='cuenta' element=<Account /> />
+    </Route>
   }
 
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Layout />,
-      children: [
-        {
-          path: 'inicio',
-          element: <Dashboard />
-        },
-        {
-          path: 'notificaciones',
-          element: <Notifications />
-        },
-        {
-          path: 'pedidos',
-          element: <Orders />,
-          children: [
-            
-          ]
-        },
-        {
-          path: 'pedidos/nuevo',
-          element: <NewOrder />
-        },
-        {
-          path: '/saldo',
-          element: <Balance />
-        },
-        {
-          path: '/tickets',
-          element: <Tickets />
-        },
-        {
-          path: '/cuenta',
-          element: <Account />
-        },
-      ]
-    },
-    {
-      path: '/inicio-sesion',
-      element: <Login />
-    },
-    {
-      path: '*',
-      element: <NotFound />
-    }
-  ]);
+  // TODO se debe definir el enrutamiento para el advisor
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <RouterProvider router={router} />
-    </ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/inicio-sesion' element={<Login />} />
+          <Route path='*' element={<NotFound />} />
+
+          {/* ROUTING PARA EL ADMIN */}
+          {renderAdminRouter()}
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider >
   )
 }
 
