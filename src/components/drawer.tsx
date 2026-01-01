@@ -11,7 +11,8 @@ import {
   Ticket,
   SquareUser,
   QrCode,
-  MessageCircle
+  MessageCircle,
+  Users
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -32,6 +33,11 @@ const items: MenuItem[] = [
     icon: <Home className="h-6 w-6" />
   },
   {
+    to: "/asesores",
+    label: "Asesores",
+    icon: <Users className="h-6 w-6" />
+  },
+  {
     to: "/pedidos",
     label: "Pedidos",
     icon: <ShoppingCart className="h-6 w-6" />,
@@ -48,7 +54,7 @@ const items: MenuItem[] = [
     to: "/tickets",
     label: "Tickets",
     icon: <Ticket className="h-6 w-6" />
-  }
+  },
 ]
 
 export default function Drawer() {
@@ -110,7 +116,7 @@ export default function Drawer() {
           {items && items.map((item: MenuItem) => (
             <Link key={item.label}
               to={item.to}
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:bg-muted"
             >
               {item.icon}
               {item.label}

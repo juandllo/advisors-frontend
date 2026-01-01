@@ -2,15 +2,21 @@ import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Layout from '@/layout/layout';
-import Dashboard from '@/pages/dashboard';
-import Notifications from '@/pages/notifications';
-import Orders from '@/pages/orders/orders';
-import NotFound from '@/pages/notFound';
-import Balance from '@/pages/balance';
-import Tickets from '@/pages/tickets';
-import Account from '@/pages/account';
-import Login from '@/pages/login';
-import NewOrder from '@/pages/orders/newOrder';
+import { 
+  Dashboard,
+  Notifications,
+  Orders,
+  Balance,
+  Tickets,
+  Account,
+  Login,
+  NewOrder,
+  NewOrderProducts,
+  Advisors,
+  NewOrderClientInfo,
+  NotFound,
+  NewOrderSummary
+} from '@/pages';
 
 import { useAuth } from '@/hooks/auth'
 import { useAuthStore } from '@/context/accountContext';
@@ -43,10 +49,15 @@ function App() {
       <Route path='inicio' element=<Dashboard /> />
       <Route path='pedidos' element=<Orders /> />
       <Route path='notificaciones' element=<Notifications /> />
-      <Route path='pedidos/nuevo' element=<NewOrder /> />
+      <Route path='nuevo-pedido' element=<NewOrder /> >
+        <Route path='productos' element=<NewOrderProducts /> />
+        <Route path='info' element=<NewOrderClientInfo /> />
+        <Route path='resumen' element=<NewOrderSummary /> />
+      </Route>
       <Route path='saldo' element=<Balance /> />
       <Route path='tickets' element=<Tickets /> />
       <Route path='cuenta' element=<Account /> />
+      <Route path='asesores' element=<Advisors /> />
     </Route>
   }
 

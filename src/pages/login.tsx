@@ -30,7 +30,7 @@ const formSchema = z.object({
   password: z.string().nonempty({ message: 'Debe ingresar una contraseña' })
 });
 
-export default function Login() {
+export function Login() {
   const navigate = useNavigate();
   const [setToken, setUser] = useAuthStore(
     (state) => [state.setToken, state.setUser]

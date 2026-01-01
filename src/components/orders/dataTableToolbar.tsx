@@ -4,7 +4,7 @@ import { Table } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { DataTableViewOptions } from "./dataTableViewOptions"
-import { DataTableFacetedFilter } from "./dataTableFacetedFilter"
+import { DataTableFacetedFilter } from "@/components/table/dataTableFacetedFilter"
 import { statuses } from "@/config/statuses"
 
 interface DataTableToolbarProps<TData> {
@@ -26,7 +26,7 @@ export function DataTableToolbar<TData>({
           placeholder="Filtrar Pedidos..."
           value={(table.getColumn("_id")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            getFilteredColumn(event,table)
+            getFilteredColumn(event, table)
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />

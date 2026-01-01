@@ -3,4 +3,5 @@ export type TProduct = {
   desc: string;
   amount: number;
   quantity: number;
+  total?: number;
 }

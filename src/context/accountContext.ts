@@ -1,4 +1,4 @@
-import { TUser } from '@/types/TUser';
+import { TUser } from '@/types';
 import { env } from '@/config/env';
 import { create } from 'zustand';
 import { jwtDecode } from 'jwt-decode';
