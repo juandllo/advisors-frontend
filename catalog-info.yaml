@@ -12,5 +12,5 @@ spec:
   type: website
   lifecycle: production
   system: Advisors
-  owner: juandllo
+  owner: Personal
   providesApis: [advisors-backend]
