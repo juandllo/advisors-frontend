@@ -11,5 +11,6 @@ metadata:
 spec:
   type: website
   lifecycle: production
+  system: Advisors
   owner: juandllo
   providesApis: [advisors-backend]
