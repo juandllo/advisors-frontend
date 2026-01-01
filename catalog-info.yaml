@@ -13,4 +13,4 @@ spec:
   lifecycle: production
   system: Advisors
   owner: Personal
-  providesApis: [advisors-backend]
+  providesApis: [advisors-api]
