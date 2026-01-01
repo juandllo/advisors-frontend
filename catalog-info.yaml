@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: advisors-frontend
+  description: Frontend application for advisors
+  tags:
+    - frontend
+    - react
+    - typescript
+    - tailwindcss
+spec:
+  type: website
+  lifecycle: production
+  owner: juandllo
+  providesApis: [advisors-backend]
